@@ -1,4 +1,5 @@
 const asyncHandler=require("express-async-handler")
+const Contact = require("../models/contactModel")
 
 
 //@desc- Get all Contacts
@@ -6,7 +7,8 @@ const asyncHandler=require("express-async-handler")
 // @access - public
 
 const getContacts =(asyncHandler(async (req,res)=>{
-    res.status(200).json({message:"Get all Contact"})
+    const contacts = await Contact.find();
+    res.status(200).json(contacts);
 }))
 
 //@desc- Get a Contact
@@ -14,21 +16,32 @@ const getContacts =(asyncHandler(async (req,res)=>{
 // @access - public
 
 const getContact =(asyncHandler(async (req,res)=>{
-    res.status(200).json({message:`get Contact of id - ${req.params.id}`})
+    const contact= await Contact.findById(req.params.id)
+    if(!contact){
+        throw new Error("Contact Not Found")
+    }
+    res.status(200).json(contact)
 }))
 
 //@desc- create  Contact
 //@route - POST  /api/contacts
 // @access - public
 
-const createContact =(asyncHandler(async (req,res)=>{
-    const {name,age,mobile}=req.body;
-    if(!name || !mobile || !age){
+const createContact =(asyncHandler(async (req,res)=>{ 
+   
+    const {name,email,phone}=req.body;
+    if(!name || !phone || !email){
         res.status(400);
         throw new Error ("ALL field are mandatory");
     }
-    console.log("req to create", req.body)
-    res.status(201).json({message:" Create Contact"})
+
+    const contact=await Contact.create({
+        name,
+        email,
+        phone
+    })
+    // console.log("req to create", req.body)
+    res.status(201).json(contact)
 }))
 
 
@@ -37,7 +50,8 @@ const createContact =(asyncHandler(async (req,res)=>{
 // @access - public
 
 const updateContact =(asyncHandler(async (req,res)=>{
-    res.status(200).json({message:`Update Contact of id - ${req.params.id}`})
+    const updatedContact=await Contact.findByIdAndUpdate(req.params.id,req.body,{new:true})
+    res.status(200).json(updatedContact)
 
 }))
 
@@ -45,10 +59,15 @@ const updateContact =(asyncHandler(async (req,res)=>{
 //@route - DELETE  /api/contacts/:id
 // @access - public
 
-const deleteContact =(asyncHandler(async(req,res)=>{
-    res.status(200).json({message:`delete Contact of id - ${req.params.id}`})
-}))
+const deleteContact = asyncHandler(async (req, res) => {
+    const contact = await Contact.findById(req.params.id);
+    if (!contact) {
+      res.status(404);
+      throw new Error("Contact not found");
+    }
+    await contact.remove();
+    res.status(200).json(contact);
+  });
 
 
-
-    module.exports ={ getContacts ,getContact,createContact,updateContact,deleteContact,};
+    module.exports ={ getContacts ,getContact,createContact,updateContact,deleteContact};
