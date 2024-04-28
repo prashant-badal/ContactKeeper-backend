@@ -5,6 +5,7 @@ const userScheme=mongoose.Schema({
 
     username:{
         type:String,
+        
         require:[true,"please add the user name"]
     },
     email:{

@@ -16,7 +16,7 @@ const getContacts =(asyncHandler(async (req,res)=>{
 // @access - public
 
 const getContact =(asyncHandler(async (req,res)=>{
-    const contact= await Contact.findById(req.params.id)
+    const contact= await Contact.findById({user_id:req.user.id})
     if(!contact){
         throw new Error("Contact Not Found")
     }
@@ -64,10 +64,10 @@ const updateContact =(asyncHandler(async (req,res)=>{
 
     const updatedContact=await Contact.findByIdAndUpdate(req.params.id,req.body,{new:true})
 
-    if (!updatedContact) {
-        res.status(404);
-        throw new Error("Contact not found");
-      }
+    // if (!updatedContact) {
+    //     res.status(404);
+    //     throw new Error("Contact not found");
+    //   }
 
    
     res.status(200).json(updatedContact)

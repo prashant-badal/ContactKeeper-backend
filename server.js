@@ -11,7 +11,12 @@ const connectDB = require('./config/dbconnection');
 
 connectDB();
 const app=express();
+
 const port=process.env.PORT ||5000;
+
+var cors = require('cors') 
+app.use(cors())
+
 app.use(express.json());
 app.use('/api/contacts',require('./routes/contactRoutes'));
 app.use('/api/user',require('./routes/userRoutes'));

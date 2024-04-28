@@ -34,7 +34,7 @@ console.log(hashpassword,"hashoasword")
     console.log(`user created ${user}`)
 
     if(user){
-        res.status(201).json({_id:user.id, email:"user.email"});
+        res.status(201).json({_id:user.id, email:user.email});
     }
 
     else{

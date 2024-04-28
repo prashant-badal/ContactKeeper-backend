@@ -45,7 +45,7 @@ const errorHandler=(err,req,res,next)=>{
     
                 });
                 default:
-                    console.log("NO ERROr , all gud")
+                    console.log("NO ERROr , all good")
                 break;
     }
 }
