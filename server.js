@@ -6,7 +6,7 @@ const errorHandler=require("./middleware/errorHandler");
 const connectDB = require('./config/dbconnection');
 
 var corsOptions = {
-    origin: 'https://mycontact-backend.onrender.com/',
+    origin: 'http://localhost:3000',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
