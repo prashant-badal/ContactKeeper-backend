@@ -57,7 +57,8 @@ const updateContact =(asyncHandler(async (req,res)=>{
     res.status(404);
     throw new Error("Contact not found");
   }
-  if(contact.user_id.toString()!==req.user.id){
+  if(contact.user_id.toString()!==req.user.id)
+  {
     res.status(403);
     throw new Error("dont have permission to  update other contact");
   }
