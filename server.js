@@ -18,6 +18,10 @@ var cors = require('cors')
 app.use(cors())
 
 app.use(express.json());
+app.get('/hello', (req, res) => {
+    res.json({ message: 'hello' });
+  });
+  
 app.use('/api/contacts',require('./routes/contactRoutes'));
 app.use('/api/user',require('./routes/userRoutes'));
 app.use(errorHandler)
