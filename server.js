@@ -6,7 +6,7 @@ const errorHandler=require("./middleware/errorHandler");
 const connectDB = require('./config/dbconnection');
 
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://my-contacts-frontend-zeta.vercel.app',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
