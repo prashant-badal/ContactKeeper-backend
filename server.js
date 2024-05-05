@@ -6,7 +6,7 @@ const errorHandler=require("./middleware/errorHandler");
 const connectDB = require('./config/dbconnection');
 
 var corsOptions = {
-    origin: 'https://contact-keeper-one.vercel.app/',
+    origin: 'https://contact-keeper-prashant1.vercel.app',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
